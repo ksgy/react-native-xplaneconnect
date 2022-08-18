@@ -15,6 +15,6 @@ const Xplaneconnect = NativeModules.Xplaneconnect  ? NativeModules.Xplaneconnect
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Xplaneconnect.multiply(a, b);
+export function connect(host: string, port: number): Promise<string> {
+  return Xplaneconnect.connect(host, port);
 }
