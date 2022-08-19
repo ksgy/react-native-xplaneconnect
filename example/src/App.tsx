@@ -14,9 +14,11 @@ export default function App() {
     <View style={styles.container}>
       <Button
         onPress={() => {
-          getDREF('sim/aircraft/view/acf_tailnum').then(setResult);
+          getDREF('sim/cockpit2/clock_timer/local_time_seconds').then(
+            setResult
+          );
         }}
-        title="get2"
+        title="get local_time_seconds"
       />
       <Text>Result: {result}</Text>
     </View>
