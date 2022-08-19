@@ -57,11 +57,16 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
 //  sendVIEW
 
   private static String getState() {
-    return  "{isConnected: "+isConnected+", message: "+message+"}";
+    return  "{isConnected: \""+isConnected+"\", message: \""+message+"\"}";
+  }
+  private static <E> String getResult(E any) {
+    return  "{" +
+      "value: \""+any.toString()+"\", " +
+      "isConnected: \""+isConnected+"\", " +
+      "message: \""+message+"\"" +
+      "}";
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
   public void connect(String host, int port, Promise promise) {
     System.out.println("X-Plane Connect example program");
@@ -78,9 +83,41 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
       message = "Unable to set up the connection. (Error message was '" + ex.getMessage() + "'.)";
       promise.resolve(getState());
     } catch (IOException ex) {
-
       isConnected = false;
       message = "Something went wrong... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
+      promise.resolve(getState());
+    }
+  }
+
+  @ReactMethod
+  public void sendDREF(String dref, float value, Promise promise) {
+    if (xpc != null) {
+      try {
+        xpc.sendDREF(dref, value);
+        promise.resolve(getResult(value));
+      } catch (IOException ex) {
+        message = "Something went wrong in sendDREF ... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
+        promise.resolve(getState());
+      }
+    } else {
+      message = "Not connected ¯\\_(ツ)_/¯";
+      promise.resolve(getState());
+    }
+  }
+
+  @ReactMethod
+  public void getDREF(String dref, Promise promise) {
+    if (xpc != null) {
+      try {
+        float[] value = xpc.getDREF(dref);
+        System.out.println(value.toString());
+        promise.resolve(getResult(value[0]));
+      } catch (IOException ex) {
+        message = "Something went wrong in sendDREF ... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
+        promise.resolve(getState());
+      }
+    } else {
+      message = "Not connected ¯\\_(ツ)_/¯";
       promise.resolve(getState());
     }
   }

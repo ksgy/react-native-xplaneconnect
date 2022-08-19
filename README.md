@@ -1,5 +1,9 @@
 # react-native-xplaneconnect
-RN XP COnnect
+
+React Native X-Plane Connect
+A react native library to connect to NASA's X-Plane Connect plugin
+https://github.com/nasa/XPlaneConnect
+
 ## Installation
 
 ```sh
@@ -9,12 +13,19 @@ npm install react-native-xplaneconnect
 ## Usage
 
 ```js
-import { multiply } from "react-native-xplaneconnect";
+import {getDREF, sendDREF} from 'react-native-xplaneconnect';
 
-// ...
+// get dataref
+const result = await getDREF('sim/cockpit2/clock_timer/local_time_seconds');
 
-const result = await multiply(3, 7);
+// set dataref
+sendDREF('sim/cockpit/autopilot/autopilot_mode', 2);
 ```
+
+## Limitations
+
+The library can only set/get float values. At the moment not all functions implemented, see the full list here:
+https://github.com/nasa/XPlaneConnect/wiki/XPC-Client-Reference
 
 ## Contributing
 

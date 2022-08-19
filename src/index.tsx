@@ -18,3 +18,10 @@ const Xplaneconnect = NativeModules.Xplaneconnect  ? NativeModules.Xplaneconnect
 export function connect(host: string, port: number): Promise<string> {
   return Xplaneconnect.connect(host, port);
 }
+
+export function sendDREF(dref: string, value: number): Promise<string> {
+  return Xplaneconnect.sendDREF(dref, value);
+}
+export function getDREF(dref: string): Promise<string> {
+  return Xplaneconnect.getDREF(dref);
+}
