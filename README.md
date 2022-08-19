@@ -22,6 +22,12 @@ const result = await getDREF('sim/cockpit2/clock_timer/local_time_seconds');
 sendDREF('sim/cockpit/autopilot/autopilot_mode', 2);
 ```
 
+## Running the Example project
+
+```
+yarn example android
+```
+
 ## Limitations
 
 The library can only set/get float values. At the moment not all functions implemented, see the full list here:
