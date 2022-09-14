@@ -20,6 +20,9 @@ import {getDREF, sendDREF} from 'react-native-xplaneconnect';
 // get dataref
 const result = await getDREF('sim/cockpit2/clock_timer/local_time_seconds');
 
+> result
+> { isConnected: boolean, message: string, value: string }
+
 // set dataref
 sendDREF('sim/cockpit/autopilot/autopilot_mode', 2);
 ```
