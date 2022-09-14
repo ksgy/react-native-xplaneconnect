@@ -10,6 +10,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.Arrays;
@@ -59,12 +62,13 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
   private static String getState() {
     return  "{isConnected: \""+isConnected+"\", message: \""+message+"\"}";
   }
-  private static <E> String getResult(E any) {
-    return  "{" +
-      "value: \""+any.toString()+"\", " +
-      "isConnected: \""+isConnected+"\", " +
-      "message: \""+message+"\"" +
+  private static <E> String getResult(E any)  {
+    String json = "{" +
+      "\"value\": \""+any.toString()+"\", " +
+      "\"isConnected\": \""+isConnected+"\", " +
+      "\"message\": \""+message+"\"" +
       "}";
+    return json;
   }
 
   @ReactMethod
@@ -94,12 +98,16 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
     if (xpc != null) {
       try {
         xpc.sendDREF(dref, value);
+        isConnected = true;
+        message = "sendDREF success";
         promise.resolve(getResult(value));
       } catch (IOException ex) {
+        isConnected = false;
         message = "Something went wrong in sendDREF ... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
         promise.resolve(getState());
       }
     } else {
+      isConnected = false;
       message = "Not connected ¯\\_(ツ)_/¯";
       promise.resolve(getState());
     }
@@ -111,12 +119,16 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
       try {
         float[] value = xpc.getDREF(dref);
         System.out.println(value.toString());
+        isConnected = true;
+        message = "getDREF success";
         promise.resolve(getResult(value[0]));
       } catch (IOException ex) {
+        isConnected = false;
         message = "Something went wrong in sendDREF ... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
         promise.resolve(getState());
       }
     } else {
+      isConnected = false;
       message = "Not connected ¯\\_(ツ)_/¯";
       promise.resolve(getState());
     }

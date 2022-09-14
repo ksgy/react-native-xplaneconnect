@@ -6,7 +6,9 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
 
-const Xplaneconnect = NativeModules.Xplaneconnect  ? NativeModules.Xplaneconnect  : new Proxy(
+const Xplaneconnect = NativeModules.Xplaneconnect
+  ? NativeModules.Xplaneconnect
+  : new Proxy(
       {},
       {
         get() {
