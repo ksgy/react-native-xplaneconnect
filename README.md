@@ -1,8 +1,10 @@
 # react-native-xplaneconnect
 
-React Native X-Plane Connect
+React Native X-Plane Connect (Android)
 A react native library to connect to NASA's X-Plane Connect plugin
 https://github.com/nasa/XPlaneConnect
+
+**iOS is not supported at the moment**
 
 ## Installation
 
