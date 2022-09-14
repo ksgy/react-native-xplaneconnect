@@ -32,7 +32,11 @@ yarn example android
 
 ## Limitations
 
-The library can only set/get float values. At the moment not all functions implemented, see the full list here:
+The library can only set/get float values. 
+
+At the moment only `getDREF` and `setDREF` functions are implemented.
+
+The full list for all other functions X-Plane Connect supports natively:
 https://github.com/nasa/XPlaneConnect/wiki/XPC-Client-Reference
 
 ## Contributing
