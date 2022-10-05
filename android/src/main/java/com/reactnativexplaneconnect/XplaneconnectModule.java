@@ -84,11 +84,11 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
       promise.resolve(getState());
     } catch (SocketException ex) {
       isConnected = false;
-      message = "Unable to set up the connection. (Error message was '" + ex.getMessage() + "'.)";
+      message = ex.getMessage();
       promise.resolve(getState());
     } catch (IOException ex) {
       isConnected = false;
-      message = "Something went wrong... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
+      message = ex.getMessage();
       promise.resolve(getState());
     }
   }
@@ -103,12 +103,12 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
         promise.resolve(getResult(value));
       } catch (IOException ex) {
         isConnected = false;
-        message = "Something went wrong in sendDREF ... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
+        message = ex.getMessage();
         promise.resolve(getState());
       }
     } else {
       isConnected = false;
-      message = "Not connected ¯\\_(ツ)_/¯";
+      message = "Not connected";
       promise.resolve(getState());
     }
   }
@@ -124,12 +124,12 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
         promise.resolve(getResult(value[0]));
       } catch (IOException ex) {
         isConnected = false;
-        message = "Something went wrong in sendDREF ... ¯\\_(ツ)_/¯ (Error message was '" + ex.getMessage() + "'.)";
+        message = ex.getMessage();
         promise.resolve(getState());
       }
     } else {
       isConnected = false;
-      message = "Not connected ¯\\_(ツ)_/¯";
+      message = "Not connected";
       promise.resolve(getState());
     }
   }
