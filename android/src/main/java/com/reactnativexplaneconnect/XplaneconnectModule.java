@@ -60,7 +60,7 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
 //  sendVIEW
 
   private static String getState() {
-    return  "{isConnected: \""+isConnected+"\", message: \""+message+"\"}";
+    return  "{\"isConnected\": \""+isConnected+"\", \"message\": \""+message+"\"}";
   }
   private static <E> String getResult(E any)  {
     String json = "{" +
