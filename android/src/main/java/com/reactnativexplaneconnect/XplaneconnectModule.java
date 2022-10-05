@@ -8,6 +8,8 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.common.ArrayUtils;
 import com.facebook.react.module.annotations.ReactModule;
 
 import org.json.JSONException;
@@ -122,6 +124,39 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
         isConnected = true;
         message = "getDREF success";
         promise.resolve(getResult(value[0]));
+      } catch (IOException ex) {
+        isConnected = false;
+        message = ex.getMessage();
+        promise.resolve(getState());
+      }
+    } else {
+      isConnected = false;
+      message = "Not connected";
+      promise.resolve(getState());
+    }
+  }
+
+  @ReactMethod
+  public void getDREFs(ReadableArray drefs, Promise promise) {
+    if (xpc != null) {
+      String[] array = new String[drefs.size()];
+      for (int i = 0; i < drefs.size(); i++) {
+        array[i] = drefs.getString(i);
+      }
+      try {
+        float[][] value = xpc.getDREFs(array);
+        StringBuilder finalValue = new StringBuilder();
+        for (int j = 0; j < value.length; j++) {
+          String sep = "";
+          if (j < value.length-1) {
+            sep = ",";
+          }
+          finalValue.append(value[j][0] + sep);
+        }
+        System.out.println(finalValue);
+        isConnected = true;
+        message = "getDREFs success";
+        promise.resolve(getResult("[" + finalValue.toString() + "]"));
       } catch (IOException ex) {
         isConnected = false;
         message = ex.getMessage();

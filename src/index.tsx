@@ -27,3 +27,7 @@ export function sendDREF(dref: string, value: number): Promise<string> {
 export function getDREF(dref: string): Promise<string> {
   return Xplaneconnect.getDREF(dref);
 }
+
+export function getDREFs(drefs: Array<string>): Promise<string> {
+  return Xplaneconnect.getDREFs(drefs);
+}
