@@ -151,7 +151,11 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
           if (j < value.length-1) {
             sep = ",";
           }
-          finalValue.append(value[j][0] + sep);
+          // TODO index 0 by default
+          // TODO loop through "value[j]" if dref has '[\d]' in it
+          if (value[j].length > 0) {
+            finalValue.append(value[j][index] + sep);
+          }
         }
         System.out.println(finalValue);
         isConnected = true;
