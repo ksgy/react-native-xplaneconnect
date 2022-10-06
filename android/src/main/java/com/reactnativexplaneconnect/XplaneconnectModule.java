@@ -18,6 +18,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import gov.nasa.xpc.XPlaneConnect;
 import gov.nasa.xpc.discovery.XPlaneConnectDiscovery;
@@ -140,19 +142,41 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
   public void getDREFs(ReadableArray drefs, Promise promise) {
     if (xpc != null) {
       String[] array = new String[drefs.size()];
+      String[] arraywithindexes = new String[drefs.size()];
       for (int i = 0; i < drefs.size(); i++) {
-        array[i] = drefs.getString(i);
+        array[i] = drefs.getString(i).replaceAll("\\[(\\d)\\]", "");
+        arraywithindexes[i] = drefs.getString(i);
       }
+
       try {
         float[][] value = xpc.getDREFs(array);
         StringBuilder finalValue = new StringBuilder();
+//        System.out.println("value.length:");
+//        System.out.println(value.length);
         for (int j = 0; j < value.length; j++) {
           String sep = "";
           if (j < value.length-1) {
             sep = ",";
           }
-          // TODO index 0 by default
-          // TODO loop through "value[j]" if dref has '[\d]' in it
+          System.out.println("value[j]");
+          System.out.println(Arrays.toString(value[j]));
+
+          int index = j;
+          final String regex = "\\[(\\d)\\]";
+          final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+          Matcher matcher = pattern.matcher(arraywithindexes[j]);
+
+          if (matcher.find()) {
+            int datarefIndex = Integer.parseInt(matcher.group(1));
+//            System.out.println("dataref:");
+//            System.out.println(arraywithindexes[j]);
+//            System.out.println("datarefIndex:");
+//            System.out.println(datarefIndex);
+//            System.out.println("datarefIndexValue:");
+//            System.out.println(value[j][datarefIndex]);
+            index = datarefIndex;
+          }
+
           if (value[j].length > 0) {
             finalValue.append(value[j][index] + sep);
           }
