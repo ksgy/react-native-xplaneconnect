@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text, Button } from 'react-native';
-import { connect, getDREF } from 'react-native-xplaneconnect';
+import { connect, getDREF, getDREFs } from 'react-native-xplaneconnect';
 
 export default function App() {
   const [result, setResult] = React.useState<{
@@ -28,7 +28,16 @@ export default function App() {
             _setResult
           );
         }}
-        title="get local_time_seconds"
+        title="get local time seconds"
+      />
+      <Button
+        onPress={() => {
+          getDREFs([
+            'sim/cockpit/electrical/beacon_lights_on',
+            'sim/cockpit2/switches/landing_lights_switch[1]',
+          ]).then(_setResult);
+        }}
+        title="get multiple: [beacon lights, landing lights]"
       />
       <Text>Result: {result.value}</Text>
     </View>
