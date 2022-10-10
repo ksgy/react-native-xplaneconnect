@@ -155,7 +155,7 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
 //        System.out.println(value.length);
         for (int j = 0; j < value.length-1; j++) {
           String sep = "";
-          if (j < value.length-1) {
+          if (j < value.length-2) {
             sep = ",";
           }
           System.out.println("value[j]");
