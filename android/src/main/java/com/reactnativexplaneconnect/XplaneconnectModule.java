@@ -161,7 +161,7 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
           System.out.println("value[j]");
           System.out.println(Arrays.toString(value[j]));
 
-          int index = j;
+          int index = 0;
           final String regex = "\\[(\\d)\\]";
           final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
           Matcher matcher = pattern.matcher(arraywithindexes[j]);
@@ -178,6 +178,8 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
           }
 
           if (value[j].length > 0) {
+            System.out.println("index");
+            System.out.println(index);
             finalValue.append(value[j][index] + sep);
           }
         }
