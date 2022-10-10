@@ -153,13 +153,13 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
         StringBuilder finalValue = new StringBuilder();
 //        System.out.println("value.length:");
 //        System.out.println(value.length);
-        for (int j = 0; j < value.length-1; j++) {
+        for (int j = 0; j < value.length; j++) {
           String sep = "";
-          if (j < value.length-2) {
+          if (j < value.length-1) {
             sep = ",";
           }
-          System.out.println("value[j]");
-          System.out.println(Arrays.toString(value[j]));
+          System.out.println();
+          System.out.println("value[j] = " + Arrays.toString(value[j]));
 
           int index = 0;
           final String regex = "\\[(\\d)\\]";
@@ -167,6 +167,7 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
           Matcher matcher = pattern.matcher(arraywithindexes[j]);
 
           if (matcher.find()) {
+            System.out.println("Found dataref index match: " + matcher.group(1));
             int datarefIndex = Integer.parseInt(matcher.group(1));
 //            System.out.println("dataref:");
 //            System.out.println(arraywithindexes[j]);
