@@ -155,8 +155,6 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
         float[][] value = xpc.getDREFs(array);
 
         StringBuilder finalValue = new StringBuilder();
-//        System.out.println("value.length:");
-//        System.out.println(value.length);
         for (int j = 0; j < value.length; j++) {
           String sep = "";
           if (j < value.length-1) {
@@ -173,12 +171,7 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
           if (matcher.find()) {
             System.out.println("      Found dataref index match in "+arraywithindexes[j]+" => " + matcher.group(1));
             int datarefIndex = Integer.parseInt(matcher.group(1));
-//            System.out.println("dataref:");
-//            System.out.println(arraywithindexes[j]);
             System.out.println("      datarefIndex: " + datarefIndex);
-//            System.out.println(datarefIndex);
-//            System.out.println("datarefIndexValue:");
-//            System.out.println(value[j][datarefIndex]);
             index = datarefIndex;
           }
 
