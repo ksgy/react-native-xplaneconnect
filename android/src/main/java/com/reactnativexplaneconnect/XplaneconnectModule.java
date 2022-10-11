@@ -147,9 +147,13 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
         array[i] = drefs.getString(i).replaceAll("\\[(\\d)\\]", "");
         arraywithindexes[i] = drefs.getString(i);
       }
+      System.out.println("====================================");
+      System.out.println("getDREFs Array of datarefs /w indexes: " + Arrays.toString(arraywithindexes));
+      System.out.println("getDREFs Array of datarefs: " + Arrays.toString(array));
 
       try {
         float[][] value = xpc.getDREFs(array);
+
         StringBuilder finalValue = new StringBuilder();
 //        System.out.println("value.length:");
 //        System.out.println(value.length);
@@ -158,8 +162,8 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
           if (j < value.length-1) {
             sep = ",";
           }
-          System.out.println();
-          System.out.println("value[j] = " + Arrays.toString(value[j]));
+          System.out.println(" => " + array[j]);
+          System.out.println("      getDREFs j, value[j] = " + j +" "+ Arrays.toString(value[j]));
 
           int index = 0;
           final String regex = "\\[(\\d)\\]";
@@ -167,22 +171,24 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
           Matcher matcher = pattern.matcher(arraywithindexes[j]);
 
           if (matcher.find()) {
-            System.out.println("Found dataref index match: " + matcher.group(1));
+            System.out.println("      Found dataref index match in "+arraywithindexes[j]+" => " + matcher.group(1));
             int datarefIndex = Integer.parseInt(matcher.group(1));
 //            System.out.println("dataref:");
 //            System.out.println(arraywithindexes[j]);
-//            System.out.println("datarefIndex:");
+            System.out.println("      datarefIndex: " + datarefIndex);
 //            System.out.println(datarefIndex);
 //            System.out.println("datarefIndexValue:");
 //            System.out.println(value[j][datarefIndex]);
             index = datarefIndex;
           }
 
+          System.out.println("      index: " + index);
+
           if (value[j].length > 0) {
-            System.out.println("index");
             System.out.println(index);
             finalValue.append(value[j][index] + sep);
           }
+          System.out.println("- - - - - - - - - - - ");
         }
         System.out.println(finalValue);
         isConnected = true;
