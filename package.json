@@ -1,7 +1,7 @@
 {
   "name": "react-native-xplaneconnect",
-  "version": "0.1.0",
-  "description": "test",
+  "version": "0.2.0",
+  "description": "React Native X-Plane Connect (Android) A react native library to connect to NASA's X-Plane Connect plugin",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
