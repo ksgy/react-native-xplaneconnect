@@ -141,6 +141,7 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getDREFs(ReadableArray drefs, Promise promise) {
     if (xpc != null) {
+      // TODO sim/cockpit2/switches/generic_lights_switch doesnt work (length>128)
       String[] array = new String[drefs.size()];
       String[] arraywithindexes = new String[drefs.size()];
       for (int i = 0; i < drefs.size(); i++) {
