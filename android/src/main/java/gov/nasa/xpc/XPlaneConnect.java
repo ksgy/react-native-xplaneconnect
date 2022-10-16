@@ -323,9 +323,9 @@ public class XPlaneConnect implements AutoCloseable
         int cur = 6;
         for(int j = 0; j < result.length; ++j)
         {
+            cur++;
             int data_size = (data[cur] > 0) ? data[cur] : 256 + data[cur];
             result[j] = new float[data_size];
-            cur++;
             for(int k = 0; k < result[j].length; ++k) //TODO: There must be a better way to do this
             {
                 result[j][k] = bb.getFloat(cur);
