@@ -180,7 +180,11 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
 
           if (value[j].length > 0) {
             System.out.println(index);
-            finalValue.append(value[j][index] + sep);
+            try {
+              finalValue.append(value[j][index] + sep);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+              finalValue.append("-1.0" + sep);
+            }
           }
           System.out.println("- - - - - - - - - - - ");
         }
