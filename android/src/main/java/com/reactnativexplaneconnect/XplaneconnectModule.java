@@ -81,7 +81,7 @@ public class XplaneconnectModule extends ReactContextBaseJavaModule {
     System.out.println("Setting up simulation...");
 
     try {
-      xpc = new XPlaneConnect(host, port, 49000);
+      xpc = new XPlaneConnect(host, port, 49020);
       xpc.getDREF("sim/test/test_float");
       isConnected = true;
       message = "";
