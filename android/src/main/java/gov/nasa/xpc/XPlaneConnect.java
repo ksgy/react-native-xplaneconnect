@@ -329,6 +329,11 @@ public class XPlaneConnect implements AutoCloseable
             }
             System.out.println("UDP cur  => " + cur);
 
+            // Hackfix? is this right?
+            if (data.length >= cur) {
+              cur = data.length -1;
+            }
+
             int data_size = (data[cur] > 0) ? data[cur] : 256 + data[cur];
             System.out.println("UDP data_size => " + data_size);
             result[j] = new float[data_size];
