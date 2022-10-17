@@ -323,7 +323,10 @@ public class XPlaneConnect implements AutoCloseable
         int cur = 6;
         for(int j = 0; j < result.length; ++j)
         {
-            System.out.println("UDP data =>" + data.toString());
+            System.out.println("UDP data length =>" + data.length);
+            for(int zz = 0; zz < data.length; ++zz) {
+              System.out.println("UDP data =>" + data[zz]);
+            }
             System.out.println("UDP cur  => " + cur);
 
             int data_size = (data[cur] > 0) ? data[cur] : 256 + data[cur];
